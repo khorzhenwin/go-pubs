@@ -1,0 +1,12 @@
+{
+    "mcpServers": {
+        "encore-mcp": {
+            "args": [
+                "mcp",
+                "run",
+                "--app=monitor-z2ai"
+            ],
+            "command": "encore"
+        }
+    }
+}

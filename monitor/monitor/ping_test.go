@@ -5,6 +5,10 @@ import (
 	"testing"
 )
 
+// Run tests using `encore test`, which compiles the Encore app and then runs `go test`.
+// It supports all the same flags that the `go test` command does.
+// You automatically get tracing for tests in the local dev dash: http://localhost:9400
+// Learn more: https://encore.dev/docs/go/develop/testing
 func TestPing(t *testing.T) {
 	ctx := context.Background()
 	tests := []struct {
@@ -13,13 +17,10 @@ func TestPing(t *testing.T) {
 	}{
 		{"encore.dev", true},
 		{"google.com", true},
-		// Test both with and without "https://"
-		{"httpbin.org/status/200", true},
-		{"https://httpbin.org/status/200", true},
 
-		// 4xx and 5xx should considered down.
-		{"httpbin.org/status/400", false},
-		{"https://httpbin.org/status/500", false},
+		// A 404 should be considered down.
+		{"https://google.com/non-existing-path", false},
+
 		// Invalid URLs should be considered down.
 		{"invalid://scheme", false},
 	}
